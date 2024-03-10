@@ -3,7 +3,7 @@ const app=express();
 const path=require("path");
 const {MongoClient}=require("mongodb");
 const { json } = require("body-parser");
-const url="mongodb://0.0.0.0:27017"
+const url="mongodb+srv://param270604:4vDMjO08tXJpItFh@users.qzwkmmp.mongodb.net/?retryWrites=true&w=majority"
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,11 +23,13 @@ app.post("/login", async (req, res) => {
     try {
         const client = new MongoClient(url);
         await client.connect();
-        const db = client.db("paramshah");
-        const collection = db.collection("paramdata");
+        const db = client.db("clients");
+        const collection = db.collection("clients_info");
 
         const data = await collection.findOne({ email: req.body.useremail });
+        console.log(data)
         let farhan = data.visitingtime;
+        console.log(farhan)
 
         if (data && data.password === req.body.userpassword) {
             const currentDate = new Date();
@@ -52,7 +54,10 @@ app.post("/login", async (req, res) => {
                     }
                 }
             );
+            await client.close()
             res.render("home");
+
+            
         } else {
             console.log("Incorrect password");
             res.end("Incorrect password");
