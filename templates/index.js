@@ -3,7 +3,7 @@ const app=express();
 const path=require("path");
 const {MongoClient}=require("mongodb");
 const { json } = require("body-parser");
-const url="mongodb+srv://param270604:4vDMjO08tXJpItFh@users.qzwkmmp.mongodb.net/?retryWrites=true&w=majority"
+const url="mongodb+srv://email:4vDMjO08tXJpItFh@users.qzwkmmp.mongodb.net/?retryWrites=true&w=majority"
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
